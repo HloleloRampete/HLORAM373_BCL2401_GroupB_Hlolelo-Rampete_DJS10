@@ -22,7 +22,10 @@ export default function App() {
     fetchPosts();
   }, [])
 
-  
+  const renderPosts = () => {
+    if (error) {
+      return <p>Error fetching posts: {error}</p>;
+    }
   
 
   return (
