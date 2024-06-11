@@ -29,15 +29,23 @@ export default function App() {
       return <p>Error fetching posts: {error}</p>;
     }
   
+    return (
+      <div>
+        {posts.map((post) => (
+          <li key={post.id}>
+            <h2>{post.title}</h2>
+            <p>{post.body}</p>
+          </li>
+        ))}
+      </div>)
+  }
 
   return (
-    <div>
-      {posts.map((post) => (
-        <li key={post.id}>
-          <h2>{post.title}</h2>
-          <p>{post.body}</p>
-        </li>
-      ))}
+    <div className="App">
+      <h1>React Blog Post Fetcher</h1>
+      {/* If using renderPosts.js, import and call it here */}
+      renderPosts()
     </div>
   )
+
 }
