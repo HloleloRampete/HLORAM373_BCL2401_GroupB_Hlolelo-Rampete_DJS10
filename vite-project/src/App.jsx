@@ -1,11 +1,12 @@
 import React from "react"
 import { useEffect, useState } from "react-dom"
+import renderPosts from "./renderPosts.js"
 
 export default function App() {
   const [posts, setPosts] = useState([])
   const [error, setError] = useState(null)
 
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchPosts = async () => {
       try {
         const response = await fetch('https://jsonplaceholder.typicode.com/posts');
@@ -22,6 +23,7 @@ export default function App() {
     fetchPosts();
   }, [])
 
+  // Function to conditionally render content 
   const renderPosts = () => {
     if (error) {
       return <p>Error fetching posts: {error}</p>;
@@ -29,6 +31,13 @@ export default function App() {
   
 
   return (
-    <h1>Hi</h1>
+    <div>
+      {posts.map((post) => (
+        <li key={post.id}>
+          <h2>{post.title}</h2>
+          <p>{post.body}</p>
+        </li>
+      ))}
+    </div>
   )
 }
