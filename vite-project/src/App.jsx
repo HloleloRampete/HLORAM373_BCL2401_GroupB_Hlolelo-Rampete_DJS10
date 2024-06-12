@@ -1,6 +1,6 @@
-import React from "react"
-import { useEffect, useState } from "react-dom"
-import renderPosts from "./renderPosts.js"
+// import React from "react"
+import { useEffect, useState } from "react"
+// import RenderPosts from "./RenderPosts.jsx"
 
 export default function App() {
   const [posts, setPosts] = useState([])
@@ -23,28 +23,25 @@ export default function App() {
     fetchPosts();
   }, [])
 
-  // Function to conditionally render content 
-  const renderPosts = () => {
-    if (error) {
-      return <p>Error fetching posts: {error}</p>;
-    }
-  
-    return (
-      <div>
-        {posts.map((post) => (
-          <li key={post.id}>
-            <h2>{post.title}</h2>
-            <p>{post.body}</p>
-          </li>
-        ))}
-      </div>)
-  }
 
+  
   return (
     <div className="App">
-      <h1>React Blog Post Fetcher</h1>
-      {/* If using renderPosts.js, import and call it here */}
-      renderPosts()
+      <h1>Posts</h1>
+      {error ? (
+        <div style={{ color: "black" }}>Error: {error}</div>
+      ) : (
+        <ul style={{ listStyleType: "none", padding: 0 }}>
+          {posts.map((post, index) => (
+            <li key={post.id}>
+              <h2>
+                {index + 1}. {post.title}
+              </h2>
+              <p>{post.body}</p>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   )
 
