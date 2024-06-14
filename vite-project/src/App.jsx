@@ -10,7 +10,7 @@ export default function App() {
     const fetchPosts = async () => {
       try {
         const response = await fetch(
-          "https://jsnplaceholder.typicode.com/posts"
+          "https://jsonplaceholder.typicode.com/posts"
         );
         if (!response.ok) {
           throw new Error("Data fetching failed"); // Use the specific error message
@@ -18,7 +18,7 @@ export default function App() {
         const data = await response.json();
         setPosts(data);
       } catch (error) {
-        setError("Data fetching failed"); 
+        setError("Data fetching failed");
       }
     };
 
@@ -27,22 +27,24 @@ export default function App() {
 
   return (
     <div>
-      <h1>Posts</h1>
       {error ? (
-        <div>
+        <div className="error">
           <strong>{error}</strong>
         </div>
       ) : (
-        <ul style={{ listStyleType: "none", padding: 0 }}>
-          {posts.map((post, index) => (
-            <li key={post.id}>
-              <h2>
-                {index + 1}. {post.title}
-              </h2>
-              <p>{post.body}</p>
-            </li>
-          ))}
-        </ul>
+        <div className="posts">
+          <h1>Posts</h1>
+          <ul style={{ listStyleType: "none" }}>
+            {posts.map((post, index) => (
+              <li key={post.id}>
+                <h2>
+                  {index + 1}. {post.title}
+                </h2>
+                <p>{post.body}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );
