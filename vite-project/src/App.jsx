@@ -1,35 +1,37 @@
 // import React from "react"
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 // import RenderPosts from "./RenderPosts.jsx"
 
 export default function App() {
-  const [posts, setPosts] = useState([])
-  const [error, setError] = useState(null)
+  const [posts, setPosts] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+        const response = await fetch(
+          "https://jsnplaceholder.typicode.com/posts"
+        );
         if (!response.ok) {
-          throw new Error(`Data fetching failed`);
+          throw new Error("Data fetching failed"); // Use the specific error message
         }
         const data = await response.json();
         setPosts(data);
       } catch (error) {
-        setError(error.message);
+        setError("Data fetching failed"); 
       }
     };
-  
+
     fetchPosts();
-  }, [])
+  }, []);
 
-
-  
   return (
-    <div className="App">
+    <div>
       <h1>Posts</h1>
       {error ? (
-        <div style={{ color: "black" }}>Error: {error}</div>
+        <div>
+          <strong>{error}</strong>
+        </div>
       ) : (
         <ul style={{ listStyleType: "none", padding: 0 }}>
           {posts.map((post, index) => (
@@ -43,6 +45,5 @@ export default function App() {
         </ul>
       )}
     </div>
-  )
-
+  );
 }
